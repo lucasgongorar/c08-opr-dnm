@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 *,
 *:after,
 *:before {
@@ -30,7 +31,7 @@ body {
 
 body {
     font-weight: 400;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: Poppins;
     font-size: var(--texto-normal);
     color: var(--lightness-30);
     background: linear-gradient(var(--lightness-70), var(--ligthness-60));
@@ -146,7 +147,7 @@ header a {
 }
 
 header input {
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: Poppins;
 }
 
 header input[name="ciudad"] {

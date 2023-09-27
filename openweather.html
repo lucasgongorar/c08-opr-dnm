@@ -52,15 +52,15 @@
                 lugar.innerHTML = tiempo.name;
                 temperatura.innerHTML = Math.round(tiempo.main.temp) + "ºC";
                 if(tiempo.coord.lat >= -27){
-                    document.body.style.background = "#fa9b93";
+                    document.body.style.background = "img/norte_chico.jpg";
                 } else if(tiempo.coord.lat < -27 && tiempo.coord.lat >= -33){
-                    document.body.style.background = "#ffc39b";                    
+                    document.body.style.background = "img/norte_grande.jpg";                    
                 } else if((tiempo.coord.lat < -33 && tiempo.coord.lat >= -37)){
-                    document.body.style.background = "#ddf19f";
+                    document.body.style.background = "img/zona_central.jpg";
                 } else if((tiempo.coord.lat < -37 && tiempo.coord.lat >= -42)){
-                    document.body.style.background = "#9bdcaa";
+                    document.body.style.background = "img/zona_sur.jpg";
                 } else {
-                    document.body.style.background = "#8eac88";
+                    document.body.style.background = "img/zona_austral.jpg";
                 }                                       
             }
             function consulta() {
