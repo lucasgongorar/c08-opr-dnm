@@ -44,7 +44,7 @@
             }
             cities().catch((error) => console.error(error));
             async function weather(ciudad) {
-                const key = "9eaf12bd13c5deb3d69a49a2e98b458f";
+                const key = "e2de3efa0f21209b6c37a59d80aa5b8d";
                 const segundo = await fetch("https://api.openweathermap.org/data/2.5/weather?q=" + ciudad + ",cl&units=metric&appid=" + key + "&lang=es");
                 const tiempo = await segundo.json();
                 console.log(tiempo);
@@ -52,15 +52,15 @@
                 lugar.innerHTML = tiempo.name;
                 temperatura.innerHTML = Math.round(tiempo.main.temp) + "ºC";
                 if(tiempo.coord.lat >= -27){
-                    document.body.style.background = "img/norte_chico.jpg";
+                    document.body.style.backgroundImage = 'url("norte_grande.jpg")';
                 } else if(tiempo.coord.lat < -27 && tiempo.coord.lat >= -33){
-                    document.body.style.background = "img/norte_grande.jpg";                    
+                    document.body.style.backgroundImage = 'url("norte_chico.jpg")';                    
                 } else if((tiempo.coord.lat < -33 && tiempo.coord.lat >= -37)){
-                    document.body.style.background = "img/zona_central.jpg";
+                    document.body.style.backgroundImage = 'url("zona_centro.jpg")';
                 } else if((tiempo.coord.lat < -37 && tiempo.coord.lat >= -42)){
-                    document.body.style.background = "img/zona_sur.jpg";
+                    document.body.style.backgroundImage = 'url("zona_sur.jpg")';
                 } else {
-                    document.body.style.background = "img/zona_austral.jpg";
+                    document.body.style.backgroundImage = 'url("zona_austral.jpg")';
                 }                                       
             }
             function consulta() {
