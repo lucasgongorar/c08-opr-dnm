@@ -25,13 +25,14 @@
             <a href="https://github.com/profesorfaco/dno037-2023-2/tree/main/clase-07">20 de septiembre, 2023</a>
         </footer>
         <script>
-        async function estudiantes() {
-                const data = await fetch("https://raw.githubusercontent.com/profesorfaco/dno037-2023-2/main/clase-07/_curso.json");
-                const datos = await data.json();
-                document.querySelector ("blockquote").innerHTML = `${datos[14].motivo}`   
-            }
-                estudiantes().catch((error) => console.error(error));
-        </script>
-        </script>
-    </body>
-</html>
+    async function estudiantes() {
+        const bruto = await fetch("https://raw.githubusercontent.com/profesorfaco/dno037-2023-2/main/clase-07/_curso.json");
+        const fino = await bruto.json();
+        const github = "https://github.com/lucasgongorar?tab=repositories";
+        console.log(fino);
+        const githubLink = `<a href="${github}" target="_blank">github</a>`;
+        document.querySelector("blockquote").innerHTML = `${fino[14].motivo}. Mi avance está en ${githubLink}`;
+    }
+
+    estudiantes().catch((error) => console.error(error));
+</script>
