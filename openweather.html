@@ -34,35 +34,42 @@
             var listaCiudades = [];
             //creando la función cities
             async function cities() {
-                const primero = await fetch("https://raw.githubusercontent.com/profesorfaco/dno037-2023-2/main/clase-07/_ciudades.json");
-                const ciudades = await primero.json();
-                console.log(ciudades);
-                ciudades.forEach((c) => {
-                    llenado.innerHTML += `<option value="${c.name}">`;
-                    listaCiudades.push(c.name);
-                });
-            }
-            cities().catch((error) => console.error(error));
-            async function weather(ciudad) {
-                const key = "e2de3efa0f21209b6c37a59d80aa5b8d";
-                const segundo = await fetch("https://api.openweathermap.org/data/2.5/weather?q=" + ciudad + ",cl&units=metric&appid=" + key + "&lang=es");
-                const tiempo = await segundo.json();
-                console.log(tiempo);
-                respuesta.removeAttribute("style");
-                lugar.innerHTML = tiempo.name;
-                temperatura.innerHTML = Math.round(tiempo.main.temp) + "ºC";
-                if(tiempo.coord.lat >= -27){
-                    document.body.style.backgroundImage = 'url("norte_grande.jpg")';
-                } else if(tiempo.coord.lat < -27 && tiempo.coord.lat >= -33){
-                    document.body.style.backgroundImage = 'url("norte_chico.jpg")';                    
-                } else if((tiempo.coord.lat < -33 && tiempo.coord.lat >= -37)){
-                    document.body.style.backgroundImage = 'url("zona_centro.jpg")';
-                } else if((tiempo.coord.lat < -37 && tiempo.coord.lat >= -42)){
-                    document.body.style.backgroundImage = 'url("zona_sur.jpg")';
-                } else {
-                    document.body.style.backgroundImage = 'url("zona_austral.jpg")';
-                }                                       
-            }
+  const primero = await fetch("https://raw.githubusercontent.com/profesorfaco/dno037-2023-2/main/clase-07/_ciudades.json");
+  const ciudades = await primero.json();
+  console.log(ciudades);
+  ciudades.forEach((c) => {
+    llenado.innerHTML += `<option value="${c.name}">`;
+    listaCiudades.push(c.name);
+  });
+}
+
+cities().catch((error) => console.error(error));
+
+async function weather(ciudad) {
+  const key = "97f088ef311f17d84fb0b3be1a7260a7";
+  const segundo = await fetch("https://api.openweathermap.org/data/2.5/weather?q=" + ciudad + ",cl&units=metric&appid=" + key + "&lang=es");
+  const tiempo = await segundo.json();
+  console.log(tiempo);
+  respuesta.removeAttribute("style");
+  lugar.innerHTML = tiempo.name;
+  temperatura.innerHTML = Math.round(tiempo.main.temp) + "ºC";
+  let backgroundImage = '';
+
+  if (tiempo.coord.lat >= -27) {
+    backgroundImage = 'url(norte_grande.jpg)';
+  } else if (tiempo.coord.lat < -27 && tiempo.coord.lat >= -33) {
+    backgroundImage = 'url(norte_chico.jpg)';
+  } else if (tiempo.coord.lat < -33 && tiempo.coord.lat >= -37) {
+    backgroundImage = 'url(zona_centro.jpg)';
+  } else if (tiempo.coord.lat < -37 && tiempo.coord.lat >= -42) {
+   backgroundImage = 'url(zona_sur.jpeg)';
+  } else {
+    backgroundImage = 'url(zona_austral.jpg)';
+  }
+
+  document.body.style.backgroundImage = backgroundImage;
+}
+
             function consulta() {
                 let valor = input.value;
                 console.log(valor);
@@ -73,6 +80,9 @@
                     input.style.background = "#f00";
                 }
             }
+
+            // ¡Cambie la API Key! Luego busque una foto que represente cada una de las cinco regiones naturales de Chile. Ajuste tal imagen para que sea usada como fondo de página y programe que se muestre dependiendo de la zona en la que se encuentra cada Ciudad por seleccionar.
+
         </script>
     </body>
 </html>
