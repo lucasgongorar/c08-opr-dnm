@@ -20,9 +20,10 @@
         <header style="display: none;">
             <div>Marque uno:</div>
             <div><input type="radio" name="selecciona" value="todos" checked />Todos</div>
-            <div><input type="radio" name="selecciona" value="libra" />Libra</div>
-            <div><input type="radio" name="selecciona" value="géminis" />Géminis</div>
-            <div><input type="radio" name="selecciona" value="tauro" />Tauro</div>
+            <div><input type="radio" name="selecciona" value="Libra" />Libra</div>
+            <div><input type="radio" name="selecciona" value="fijo" />Fijos</div>
+            <div><input type="radio" name="selecciona" value="mutable" />Mutables</div>
+            <div><input type="radio" name="selecciona" value="cardinal" />Cardinales</div>
         </header>
         <aside></aside>
         <main></main>
@@ -62,25 +63,32 @@
                 respuesta.innerHTML = ``;
                 detalles.innerHTML = ``;
 
-                //Lo que sigue lo saqué de https://www.clara.es/
-
-                if (valor == "libra") {
+                if (valor == "fijo") {
                     about =
-                        "<em>Signo de Aire</em>: Al igual que su propio arquetipo: la balanza, símbolo de justicia, las Libra son personas que presentan un sentido de la ecuanimidad y la tolerancia muy desarrollado; comprenden las posturas de los demás y al mismo tiempo procuran dirimir las diferencias. En general, no les gusta la rutina, sobre todo en su trabajo; además tienen una fina sensibilidad artística que pueden llegar a canalizar profesionalmente.";
-                } else if (valor == "géminis") {
+                        "Los signos fijos son aquellos que están en medio del desarrollo de las estaciones (primavera, verano, otoño e invierno).Estos signos poseen el gusto por el respeto y seguimiento del orden y las estructuras para lograr sus objetivos. Las personas con muchos signos fijos en su carta astral suelen ser leales, consistentes, sensatos y estables. No son muy amigos de los cambios y prefieren tener ideas claras y precisas con las cuáles vivir y crear. ";
+                } else if (valor == "mutable") {
                     about =
-                        "<em>Signo de Aire</em>: Los géminis son personas inquietas que empiezan nuevos proyectos y retos con mucho entusiasmo, aunque con demasiada frecuencia les falta la constancia necesaria para realizarlos. Tienden a pensar en la vida como un juego y buscan la diversión y aventura en todo lo que hacen; tienen el egoísmo y la imaginación propia de la infancia.";
-                } else if (valor == "tauro") {
+                        "los signos mutables son aquellos que marcan el final de las estaciones, su cierre y por lo tanto su subsiguiente final. Los mutables tienen el increíble don de la adaptabilidad, ellos no se encasillan en una sola definición o norma.Les suele ser fácil el transformarse según las necesidades la situación sin por ello traicionarse. En ellos coexisten las contradicciones que a ojos de otros observadores serían irreconciliables. Son espontáneos, impredecibles y flexibles. Aunque también podrían llegar a pecar de superficialidad, inestabilidad o dificultad para decidir.";
+                } else if (valor == "cardinal") {
                     about =
-                        "<em>Signo de Tierra</em>: Un Tauro es un ser decidido, pragmático y tiene una enorme fuerza de voluntad. Tiende a las ideas conservadoras, y como le gusta tanto la estabilidad, sus ideas son fijas no hay manera de convencer a un Tauro de algo que vaya en contra de sus principios o de lo que piensa y siente, así que la terquedad es otra de sus características más evidente.";
-                         } else {
+                        "Los signos cardinales como signos que están en los inicios de las nuevas estaciones son aquellos que se caracterizan por su inclinación a iniciar cosas nuevas. Su energía busca emprender y asumir nuevos retos. Las personas nacidas bajo estos signos tiene la facilidad de ser proactivos, decididos y con el gusto por iniciar cambios. Suelen ser buenos líderes pero también tienen un lado agresivo que puede salir con más facilidad que otros signos.";
+                } else if (valor == "Libra"){ 
+                    about =
+                        "Al igual que su propio arquetipo: la balanza, símbolo de justicia, las Libra son personas que presentan un sentido de la ecuanimidad y la tolerancia muy desarrollado; comprenden las posturas de los demás y al mismo tiempo procuran dirimir las diferencias. En general, no les gusta la rutina, sobre todo en su trabajo; además tienen una fina sensibilidad artística que pueden llegar a canalizar profesionalmente.";
+                } else {
                     about = "Diseño y nuevos medios."
                 }
 
                 detalles.innerHTML += `<div><p>${about}</p></div>`;
 
                 datos.forEach((x) => {
-                    if (valor == x.zodiaco.elemento) {
+                    if (valor == x.zodiaco.signo) {
+                        respuesta.innerHTML += `<article><div><img src="${x.avatar}"></div><div><p><a href="integrante.html?lista=${x.lista}">${x.nombres.split(" ")[0]} ${x.apellidos.split(" ")[0]}</a></p><p>${
+                            x.zodiaco.signo
+                        }</p></div></article>`;
+                    }
+
+                    else if (valor == x.zodiaco.modalidad) {
                         respuesta.innerHTML += `<article><div><img src="${x.avatar}"></div><div><p><a href="integrante.html?lista=${x.lista}">${x.nombres.split(" ")[0]} ${x.apellidos.split(" ")[0]}</a></p><p>${
                             x.zodiaco.signo
                         }</p></div></article>`;
@@ -98,7 +106,6 @@
                         compatibilidad(valor);
                     } else {
                         window.location.reload();
-                        estudiantes().catch((error) => console.error(error));
                     }
                 });
             });
