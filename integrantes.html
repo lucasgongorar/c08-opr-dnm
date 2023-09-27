@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <link rel="stylesheet" href="style.css" />
+        <title>DNOO37 | EVALUACIÓN Nº2</title>
+    </head>
+    <body>
+        <nav>
+            <h1><a href="index.html">NOMBRE APELLIDO</a></h1>
+            <select onchange="location = this.value;">
+                <option value="index.html">INDEX</option>
+                <option value="integrantes.html" selected>INTEGRANTES</option>
+                <option value="openweather.html">OPEN WEATHER</option>
+                <option value="picture.html">PICTURE OF THE DAY</option>
+                <option value="sismico.html">SÍSMICO</option>
+            </select>
+        </nav>
+        <header style="display: none;">
+            <div>Marque uno:</div>
+            <div><input type="radio" name="selecciona" value="todos" checked />Todos</div>
+            <div><input type="radio" name="selecciona" value="libra" />Libra</div>
+            <div><input type="radio" name="selecciona" value="géminis" />Géminis</div>
+            <div><input type="radio" name="selecciona" value="tauro" />Tauro</div>
+        </header>
+        <aside></aside>
+        <main></main>
+        <script>
+            const alternativas = document.querySelector("header");
+            const detalles = document.querySelector("aside");
+            const respuesta = document.querySelector("main");
+            var datos;
+            async function estudiantes() {
+                const data = await fetch("https://raw.githubusercontent.com/profesorfaco/dno037-2023-2/main/clase-07/_curso.json");
+                datos = await data.json();
+                alternativas.removeAttribute("style");
+                console.log(datos);
+                signos = [];
+                datos.forEach((x) => {
+                    if(x.github !== ""){
+                        respuesta.innerHTML += `<article><div><img src="${x.avatar}"></div><div><p><a href="integrante.html?lista=${x.lista}">${x.nombres.split(" ")[0]} ${x.apellidos.split(" ")[0]}</a></p><p>${
+                            x.zodiaco.signo
+                        }</p></div></article>`;
+                        signos.push(x.zodiaco.signo);
+                    }
+                });
+
+
+    const counts = {};
+    signos.forEach((x) => {
+      counts[x] = (counts[x] || 0) + 1;
+    });
+    console.log(counts)
+
+
+
+            }
+            estudiantes().catch((error) => console.error(error));
+
+            function compatibilidad(valor) {
+                respuesta.innerHTML = ``;
+                detalles.innerHTML = ``;
+
+                //Lo que sigue lo saqué de https://www.clara.es/
+
+                if (valor == "libra") {
+                    about =
+                        "<em>Signo de Aire</em>: Al igual que su propio arquetipo: la balanza, símbolo de justicia, las Libra son personas que presentan un sentido de la ecuanimidad y la tolerancia muy desarrollado; comprenden las posturas de los demás y al mismo tiempo procuran dirimir las diferencias. En general, no les gusta la rutina, sobre todo en su trabajo; además tienen una fina sensibilidad artística que pueden llegar a canalizar profesionalmente.";
+                } else if (valor == "géminis") {
+                    about =
+                        "<em>Signo de Aire</em>: Los géminis son personas inquietas que empiezan nuevos proyectos y retos con mucho entusiasmo, aunque con demasiada frecuencia les falta la constancia necesaria para realizarlos. Tienden a pensar en la vida como un juego y buscan la diversión y aventura en todo lo que hacen; tienen el egoísmo y la imaginación propia de la infancia.";
+                } else if (valor == "tauro") {
+                    about =
+                        "<em>Signo de Tierra</em>: Un Tauro es un ser decidido, pragmático y tiene una enorme fuerza de voluntad. Tiende a las ideas conservadoras, y como le gusta tanto la estabilidad, sus ideas son fijas no hay manera de convencer a un Tauro de algo que vaya en contra de sus principios o de lo que piensa y siente, así que la terquedad es otra de sus características más evidente.";
+                         } else {
+                    about = "Diseño y nuevos medios."
+                }
+
+                detalles.innerHTML += `<div><p>${about}</p></div>`;
+
+                datos.forEach((x) => {
+                    if (valor == x.zodiaco.elemento) {
+                        respuesta.innerHTML += `<article><div><img src="${x.avatar}"></div><div><p><a href="integrante.html?lista=${x.lista}">${x.nombres.split(" ")[0]} ${x.apellidos.split(" ")[0]}</a></p><p>${
+                            x.zodiaco.signo
+                        }</p></div></article>`;
+                    }
+                });
+            }
+
+            const seleccionado = document.querySelectorAll('input[name="selecciona"]');
+
+            seleccionado.forEach((i) => {
+                i.addEventListener("change", function () {
+                    var valor = this.value;
+                    if (valor !== "todos"){
+                        console.log(valor);
+                        compatibilidad(valor);
+                    } else {
+                        window.location.reload();
+                        estudiantes().catch((error) => console.error(error));
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>
