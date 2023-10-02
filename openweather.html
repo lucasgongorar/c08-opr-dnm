@@ -56,16 +56,17 @@ async function weather(ciudad) {
   let backgroundImage = '';
 
   if (tiempo.coord.lat >= -27) {
-    backgroundImage = 'url(norte_grande.jpg)'; document.body.style.backgroundSize = "cover"; document.backgroundPosition = "0 0"
+    backgroundImage = 'url(norte_grande.webp)';
   } else if (tiempo.coord.lat < -27 && tiempo.coord.lat >= -33) {
-    backgroundImage = 'url(norte_chico.jpg)'; document.body.style.backgroundSize = "cover"; document.backgroundPosition = "0 0"
+    backgroundImage = 'url(norte_chico.webp)'; 
   } else if (tiempo.coord.lat < -33 && tiempo.coord.lat >= -37) {
-    backgroundImage = 'url(zona_centro.jpg)'; document.body.style.backgroundSize = "cover"; document.backgroundPosition = "0 0"
+    backgroundImage = 'url(zona_centro.webp)'; 
   } else if (tiempo.coord.lat < -37 && tiempo.coord.lat >= -42) {
-   backgroundImage = 'url(zona_sur.jpeg)'; document.body.style.backgroundSize = "cover"; document.backgroundPosition = "0 0"
+   backgroundImage = 'url(zona_sur.webp)'; 
   } else {
-    backgroundImage = 'url(zona_austral.jpg)'; document.body.style.backgroundSize = "cover"; document.backgroundPosition = "0 0"
+    backgroundImage = 'url(zona_austral.webp)';
   }
+  document.body.style.backgroundSize = "cover"; document.backgroundPosition = "0 0"
 
 }
 
